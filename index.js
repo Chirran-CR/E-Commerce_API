@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const defaultRouter = require("./defaultRoute");
 const productRouter = require("./productRoute");
+const errorHandler = require("./errorHandler");
 const dotenv = require("dotenv").config();
 const app = express();
 app.use(express.json());
@@ -20,7 +21,7 @@ app.use("/",defaultRouter);
 app.use("/product",productRouter);
 
 //For handling Error
-// app.use(errorHa)
+app.use(errorHandler);
 
 //Server Running
 app.listen(PORT, () => console.log("server is running at port : " + PORT));

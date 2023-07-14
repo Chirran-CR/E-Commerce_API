@@ -20,6 +20,9 @@ exports.addAProduct = async (req,res)=>{
 exports.updateAProduct = async (req,res)=>{
     const id = req.params.id;
     const updatedProduct = await itemModel.findByIdAndUpdate({_id:id},req.body,{new:true});
+    if(!updatedProduct){
+        throw new Error("Wrong product Id is given.");
+    }
     res.status(200).send({
         message:"Product is Updated Successfully.",
         updatedProduct:updatedProduct
@@ -29,6 +32,9 @@ exports.updateAProduct = async (req,res)=>{
 exports.deleteAProduct = async (req,res)=>{
     const id = req.params.id;
     const deletedProduct = await itemModel.findByIdAndDelete({_id:id});
+    if(!deletedProduct){
+        throw new Error("Wrong product Id is given.");
+    }
     res.status(200).send({
         message:"Product is Deleted Successfully.",
         deletedProduct:deletedProduct
